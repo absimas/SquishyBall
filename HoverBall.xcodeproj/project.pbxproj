@@ -13,6 +13,7 @@
 		2879247A1AA788790025C1EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 287924791AA788790025C1EA /* Images.xcassets */; };
 		2879247D1AA788790025C1EA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2879247B1AA788790025C1EA /* LaunchScreen.xib */; };
 		287924891AA788790025C1EA /* HoverBallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287924881AA788790025C1EA /* HoverBallTests.swift */; };
+		287924931AA79CDD0025C1EA /* BallScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287924921AA79CDD0025C1EA /* BallScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		287924821AA788790025C1EA /* HoverBallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HoverBallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		287924871AA788790025C1EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		287924881AA788790025C1EA /* HoverBallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverBallTests.swift; sourceTree = "<group>"; };
+		287924921AA79CDD0025C1EA /* BallScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				287924791AA788790025C1EA /* Images.xcassets */,
 				2879247B1AA788790025C1EA /* LaunchScreen.xib */,
 				287924701AA788790025C1EA /* Supporting Files */,
+				287924921AA79CDD0025C1EA /* BallScene.swift */,
 			);
 			path = HoverBall;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				287924751AA788790025C1EA /* ViewController.swift in Sources */,
+				287924931AA79CDD0025C1EA /* BallScene.swift in Sources */,
 				287924731AA788790025C1EA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +411,7 @@
 				2879248E1AA788790025C1EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2879248F1AA788790025C1EA /* Build configuration list for PBXNativeTarget "HoverBallTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +420,7 @@
 				287924911AA788790025C1EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
