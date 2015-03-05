@@ -10,10 +10,20 @@ import Foundation
 import SpriteKit
 import UIKit
 
-class BallScene: SKScene {
+class BallScene: SKScene, SKPhysicsContactDelegate {
 
     var names = [String]()
     var touchHashes = [Int]()
+    
+    // Bit masks
+    let floorCategory: UInt32 = 0x1 << 0;
+    let sceneCategory: UInt32  = 0x1 << 1;
+    let ballCategory: UInt32  = 0x1 << 2;
+    
+    // Limitations
+    let maxScaleBy = CGFloat(4/5.0)
+    let maxImpulse = CGFloat(900)
+    let minImpulse = CGFloat(100)
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -22,29 +32,88 @@ class BallScene: SKScene {
     override init(size: CGSize) {
         super.init(size: size)
         physicsWorld.gravity = CGVectorMake(0, -6)
+        physicsBody?.categoryBitMask = sceneCategory
+        physicsBody?.contactTestBitMask = sceneCategory | ballCategory
+        physicsBody?.collisionBitMask = sceneCategory | ballCategory
+        physicsWorld.contactDelegate = self
+    }
+    
+    // Contact delegate
+    func didBeginContact(contact: SKPhysicsContact) {
+        var ballNode: SKNode?
+        // Impulse must be higher than 30
+        if contact.collisionImpulse > minImpulse {
+            // Check if a ball is involved in the contact
+            let nodeBName = contact.bodyB.node?.name
+            if let nodeName = contact.bodyA.node?.name {
+                if contains(names, nodeName) {
+                    println("A is a ball and the impulse is \(contact.collisionImpulse)")
+                    ballNode = contact.bodyA.node
+                }
+            } else if let nodeName = contact.bodyB.node?.name {
+                if contains(names, nodeName) {
+                    println("B is a ball and the impulse is \(contact.collisionImpulse)")
+                    ballNode = contact.bodyB.node
+                }
+            } else {
+                return;
+            }
+            
+            squashNode(ballNode!, collisionImpulse: contact.collisionImpulse)
+        }
+    }
+
+    // ToDo anchor on the bottom of the ball? so it move up when Y axis is scaled
+    func squashNode(node: SKNode, collisionImpulse: CGFloat) {
+        if collisionImpulse < minImpulse {
+            return
+        }
+        var impulse = max(collisionImpulse, maxImpulse)
+        
+        let xTo = 1 + (impulse / 9000)
+        let yTo = 1 - (impulse / 9000)
+        let interval = 0.2 - (impulse / 9000)
+        
+        var actions = Array<SKAction>();
+        actions.append(SKAction.scaleXBy(xTo, y: yTo, duration: NSTimeInterval(interval)))
+        actions.append(SKAction.scaleXBy(1/xTo, y: 1/yTo, duration: NSTimeInterval(interval)))
+        let sequence = SKAction.sequence(actions);
+
+        node.runAction(sequence)
     }
     
     func addFloor(color: SKColor, size: CGSize) {
         let floor = SKSpriteNode(color: color, size: size)
         floor.anchorPoint = CGPoint(x: 0, y: 0)
-//        floorNode.physicsBody = SKPhysicsBody(edgeLoopFromRect: frame) // jumps back from sides of the scene
-        floor.physicsBody = SKPhysicsBody(edgeLoopFromRect: floor.frame) // jumps back from the floor
-        floor.physicsBody?.dynamic = false
+        
+        // Physics
+        let physicsBody = SKPhysicsBody(edgeLoopFromRect: frame) // use scene frame edges
+        physicsBody.dynamic = false
+        physicsBody.categoryBitMask = floorCategory
+        physicsBody.contactTestBitMask = floorCategory | ballCategory
+        physicsBody.collisionBitMask = floorCategory | ballCategory
+        floor.physicsBody = physicsBody
+        
         addChild(floor)
     }
     
     func addBall(name: String, color: SKColor, radius: Int, position: CGPoint) {
         let ball = SKShapeNode(circleOfRadius: CGFloat(radius))
         ball.name = name
+        // Physics
         let physicsBody = SKPhysicsBody(circleOfRadius: CGFloat(radius))
         physicsBody.restitution = 0.7 // bounciness
-        physicsBody.mass = 0.5
+        physicsBody.mass = 0.4
         physicsBody.friction = 0.7
         physicsBody.dynamic = true
+        physicsBody.categoryBitMask = ballCategory
+        physicsBody.contactTestBitMask = ballCategory | floorCategory | sceneCategory
+        physicsBody.collisionBitMask = ballCategory | floorCategory | sceneCategory
         ball.physicsBody = physicsBody
+        
         ball.position = position
         ball.fillColor = color
-        addChild(ball	)
+        addChild(ball)
         names += [name]
     }
     

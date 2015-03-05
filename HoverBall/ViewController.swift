@@ -30,6 +30,10 @@ class ViewController: UIViewController {
         scene.addFloor(SKColor.blackColor(), size: CGSize(width: screenWidth, height: 20))
         scene.addBall("ball1", color: SKColor.redColor(), radius: 50,
             position: CGPoint(x: screenWidth / 2, y: screenHeight - 50))
+//        scene.addBall("ball2", color: SKColor.greenColor(), radius: 20,
+//            position: CGPoint(x: screenWidth / 2 + 50, y: screenHeight - 50))
+//        scene.addBall("ball3", color: SKColor.blueColor(), radius: 40,
+//            position: CGPoint(x: screenWidth / 2 - 50, y: screenHeight - 50))
         
         // Animate scene entry
         let doorOpenX = SKTransition.doorsOpenHorizontalWithDuration(10.0)
