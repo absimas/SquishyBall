@@ -31,6 +31,7 @@ class BallScene: SKScene, SKPhysicsContactDelegate {
     
     override init(size: CGSize) {
         super.init(size: size)
+        
         physicsWorld.gravity = CGVectorMake(0, -6)
         physicsBody?.categoryBitMask = sceneCategory
         physicsBody?.contactTestBitMask = sceneCategory | ballCategory

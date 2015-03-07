@@ -20,11 +20,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        skView.showsPhysics = true
+        skView.showsPhysics = true
+        skView.showsFPS = true
+        skView.showsDrawCount = true
+        skView.showsNodeCount = true
+        skView.showsQuadCount = true
+        
         
         let screenWidth = view.frame.size.width
         let screenHeight = view.frame.size.height
-
+        
         // Scene
         let scene = BallScene(size: CGSize(width: screenWidth, height: screenHeight))
         scene.addFloor(SKColor.blackColor(), size: CGSize(width: screenWidth, height: 20))

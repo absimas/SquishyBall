@@ -16,16 +16,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jda-P0-nfU" customClass="SKView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oWY-xh-J6d" customClass="SKView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="oWY-xh-J6d" secondAttribute="bottom" id="2My-Ej-yWY"/>
+                            <constraint firstAttribute="trailing" secondItem="oWY-xh-J6d" secondAttribute="trailing" id="6Hw-1o-Vv7"/>
+                            <constraint firstItem="oWY-xh-J6d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="FoP-bg-m8L"/>
+                            <constraint firstItem="oWY-xh-J6d" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="adG-qn-fwV"/>
+                        </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="skView" destination="Jda-P0-nfU" id="8fn-3p-Cvb"/>
+                        <outlet property="skView" destination="oWY-xh-J6d" id="BCk-oc-hSm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
