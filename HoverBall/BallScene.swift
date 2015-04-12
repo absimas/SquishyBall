@@ -118,9 +118,9 @@ class BallScene: SKScene, SKPhysicsContactDelegate {
         names += [name]
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch in touches {
-            let touch = touch as UITouch
+            let touch = touch as! UITouch
             let node = nodeAtPoint(touch.locationInNode(self))
             if isTouchingNode(touch as UITouch, node: node) {
                 // Disable gravity for the touched node
@@ -131,9 +131,9 @@ class BallScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch in touches {
-            let touch = touch as UITouch
+            let touch = touch as! UITouch
             let node = nodeAtPoint(touch.locationInNode(self))
             if isTouchingNode(touch as UITouch, node: node) {
                 // Re-enable gravity for the touched node
@@ -144,13 +144,13 @@ class BallScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
         touchesEnded(touches, withEvent: event)
     }
     
-    override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
         for touch in touches {
-            let touch = touch as UITouch
+            let touch = touch as! UITouch
             let node = nodeAtPoint(touch.locationInNode(self))
             if isNodeTouchEvent(touch as UITouch) {
                 // Move the node  to the specified point
